@@ -75,13 +75,10 @@ namespace Galaga.Class {
             bullets.Add(new Bullet(pos));
         }
 
-        
-
-
         public class Bullet {
             Vector2 pos;
             public Boolean onScreen = true;
-            float speed = 300f;
+            float speed = 800f;
 
             public Bullet(Vector2 playerPos) {
                 this.pos = new Vector2(playerPos.X - Game1.textureManager.bullet.Width/2,playerPos.Y);

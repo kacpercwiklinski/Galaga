@@ -42,11 +42,13 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Class\EnemyScripts\TestEnemy.cs" />
     <Compile Include="Class\PlayerScripts\Player.cs" />
     <Compile Include="Class\Screen\GameScreen.cs" />
     <Compile Include="Class\Screen\MenuScreen.cs" />
     <Compile Include="Class\Screen\Screen.cs" />
     <Compile Include="Class\Screen\SplashScreen.cs" />
+    <Compile Include="Class\Utils\BezierCurve.cs" />
     <Compile Include="Class\Utils\TextureManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
