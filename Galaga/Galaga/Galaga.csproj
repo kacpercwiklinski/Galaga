@@ -48,6 +48,7 @@
     <Compile Include="Class\Screen\MenuScreen.cs" />
     <Compile Include="Class\Screen\Screen.cs" />
     <Compile Include="Class\Screen\SplashScreen.cs" />
+    <Compile Include="Class\Utils\Animator.cs" />
     <Compile Include="Class\Utils\BezierCurve.cs" />
     <Compile Include="Class\Utils\TextureManager.cs" />
     <Compile Include="Game1.cs" />

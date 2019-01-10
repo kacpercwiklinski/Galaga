@@ -16,9 +16,9 @@ namespace Galaga.Class.Utils {
         public Texture2D player;
         public Texture2D bullet;
 
-
         // Enemies
-        public Texture2D enemy1;
+        public List<Texture2D> enemy1 = new List<Texture2D>();
+        public List<Texture2D> enemy2 = new List<Texture2D>();
 
         // Debug
         public Texture2D centerLine;
@@ -36,8 +36,12 @@ namespace Galaga.Class.Utils {
             bullet = theContent.Load<Texture2D>("Textures/Object/bullet");
 
             // Enemies
-            enemy1 = theContent.Load<Texture2D>("Textures/Enemies/enemy1");
+            enemy1.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy1/enemy1_1"));
+            enemy1.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy1/enemy1_2"));
 
+            enemy2.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy2/enemy2_1"));
+            enemy2.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy2/enemy2_2"));
+            
             // Debug
             centerLine = theContent.Load<Texture2D>("Textures/DebugTextures/centerLine");
 

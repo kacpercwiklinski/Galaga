@@ -19,14 +19,14 @@ namespace Galaga.Class.Screen {
         public GameScreen(ContentManager theContent, EventHandler theScreenEvent) : base(theScreenEvent) {
             player = new Player();
             testEnemy1 = new TestEnemy(0f);
-            testEnemy2 = new TestEnemy(0.05f);
+         //   testEnemy2 = new TestEnemy(0.05f);
 
         }
 
         public override void Update(GameTime theTime) {
             player.Update(theTime);
             testEnemy1.Update(theTime);
-            testEnemy2.Update(theTime);
+          //  testEnemy2.Update(theTime);
 
             base.Update(theTime);
         }
@@ -35,7 +35,7 @@ namespace Galaga.Class.Screen {
 
             player.Draw(theBatch);
             testEnemy1.Draw(theBatch);
-            testEnemy2.Draw(theBatch);
+          //  testEnemy2.Draw(theBatch);
 
             theBatch.Draw(Game1.textureManager.centerLine, new Vector2(Game1.WIDTH / 2, 0), Color.White);
 

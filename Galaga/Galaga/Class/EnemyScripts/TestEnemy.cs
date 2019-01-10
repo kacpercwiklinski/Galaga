@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 namespace Galaga.Class.EnemyScripts {
     class TestEnemy {
 
-        Texture2D enemyTexture;
+        Texture2D texture;
         List<Vector2> bezierPoints = new List<Vector2>();
         float t;
         Vector2 pos;
+        float counter = 0f;
 
         public TestEnemy(float _t) {
             t = _t;
-            enemyTexture = Game1.textureManager.enemy1;
+            texture = Game1.textureManager.enemy2.First();
             bezierPoints.Add(new Vector2(15, 15));
             bezierPoints.Add(new Vector2(Game1.WIDTH/2, Game1.HEIGHT/2 + 100));
             bezierPoints.Add(new Vector2(Game1.WIDTH/2, Game1.HEIGHT/2));
@@ -25,18 +26,18 @@ namespace Galaga.Class.EnemyScripts {
         }
 
         public void Update(GameTime theTime) {
+            counter += (float)theTime.ElapsedGameTime.TotalSeconds;
+
+            Animator.animate(theTime, ref this.texture, Game1.textureManager.enemy2, 0.4f, ref counter, true);
+
             this.pos = BezierCurve.GetPoint(t, bezierPoints.ElementAt(0), bezierPoints.ElementAt(1), bezierPoints.ElementAt(2), bezierPoints.ElementAt(3));
             t += 0.005f;
             t = t > 1 ? 0 : t;
         }
 
         public void Draw(SpriteBatch theBatch) {
-            theBatch.Draw(enemyTexture, pos, Color.White);
+            theBatch.Draw(texture, pos, Color.White);
         }
     }
-
-
-
-
 
 }
