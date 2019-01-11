@@ -13,6 +13,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Font/bezierCurveFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/bezierCurveFont.spritefont
+
 #begin Font/optionFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

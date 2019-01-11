@@ -23,9 +23,9 @@ namespace Galaga.Class.LevelScripts {
         private void setupPath(int levelIndex) {
             switch (levelIndex) {
                 case 1:
-                    Paths.path1.setupCurve(0,new Vector2(15, 15), new Vector2(Game1.WIDTH / 2, Game1.HEIGHT / 2 + 100), new Vector2(Game1.WIDTH / 2, Game1.HEIGHT / 2), new Vector2(Game1.WIDTH/2, Game1.HEIGHT));
-                    Paths.path1.setupCurve(1, new Vector2(Game1.WIDTH/2, Game1.HEIGHT), new Vector2(0,0), new Vector2(Game1.WIDTH,Game1.HEIGHT), new Vector2(Game1.WIDTH / 2 + 100, Game1.HEIGHT - 100));
-                    Paths.path1.setupCurve(2, new Vector2(Game1.WIDTH / 2 + 100, Game1.HEIGHT - 100), new Vector2(0,Game1.HEIGHT), new Vector2(Game1.WIDTH,0), new Vector2(Game1.WIDTH / 2, Game1.HEIGHT/2));
+                    Paths.path1.setupCurve(0,new Vector2(0, 289), new Vector2(281, 166), new Vector2(75, 121), new Vector2(209, 270));
+                    Paths.path1.setupCurve(1, new Vector2(209, 270), new Vector2(416, 462), new Vector2(778, 159), new Vector2(433, 108));
+                    Paths.path1.setupCurve(2, new Vector2(433, 108), new Vector2(1231, 176), new Vector2(1106, 656), new Vector2(929, 250));
                     break;
                 case 2:
                     Paths.path2.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());

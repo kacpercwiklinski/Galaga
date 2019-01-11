@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 namespace Galaga.Class.Utils {
     public class TextureManager {
 
+        // Fonts
+        public SpriteFont bezierCurveFont;
+
         //Background
         public Texture2D splashScreenBackground;
         
@@ -30,6 +33,10 @@ namespace Galaga.Class.Utils {
         }
 
         private void loadTextures(ContentManager theContent) {
+
+            // Fonts 
+            bezierCurveFont = theContent.Load<SpriteFont>("Font/bezierCurveFont");
+
             // Background
             splashScreenBackground = theContent.Load<Texture2D>("Textures/Background/splashScreenBackground");
 
