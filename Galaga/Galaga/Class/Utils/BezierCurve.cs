@@ -25,5 +25,4 @@ namespace Galaga.Class.Utils {
 	            return new Vector2(resX, resY);
 	    }
     }
-
 }

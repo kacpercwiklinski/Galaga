@@ -22,6 +22,8 @@ namespace Galaga.Class.Utils {
 
         // Debug
         public Texture2D centerLine;
+        public Texture2D point;
+        public Texture2D curvePoint;
 
         public TextureManager(ContentManager theContent) {
             loadTextures(theContent);
@@ -44,6 +46,8 @@ namespace Galaga.Class.Utils {
             
             // Debug
             centerLine = theContent.Load<Texture2D>("Textures/DebugTextures/centerLine");
+            point = theContent.Load<Texture2D>("Textures/DebugTextures/Point");
+            curvePoint = theContent.Load<Texture2D>("Textures/DebugTextures/curvePoint");
 
         }
     }

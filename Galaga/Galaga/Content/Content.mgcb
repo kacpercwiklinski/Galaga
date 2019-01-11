@@ -44,6 +44,30 @@
 /processorParam:TextureFormat=Color
 /build:Textures/DebugTextures/centerLine.png
 
+#begin Textures/DebugTextures/curvePoint.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/DebugTextures/curvePoint.png
+
+#begin Textures/DebugTextures/Point.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/DebugTextures/Point.png
+
 #begin Textures/Enemies/Enemy1/enemy1_1.png
 /importer:TextureImporter
 /processor:TextureProcessor

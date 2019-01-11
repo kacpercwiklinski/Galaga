@@ -20,6 +20,7 @@ namespace Galaga.Class.Screen {
 
             options = new List<Option>();
             options.Add(new Option("Play", true));
+            options.Add(new Option("Bezier Editor", false));
             options.Add(new Option("Exit", false));
 
             optionsFont = theContent.Load<SpriteFont>("font/optionFont");
@@ -38,9 +39,11 @@ namespace Galaga.Class.Screen {
         public override void Update(GameTime theTime) {
             var kstate = Keyboard.GetState();
 
+            /*
             if (GamePad.GetState(PlayerOne).Buttons.B == ButtonState.Pressed || kstate.IsKeyDown(Keys.B) == true) {
                 ScreenEvent.Invoke(this, new EventArgs());
             }
+            */
 
             updateCounter(theTime);
 

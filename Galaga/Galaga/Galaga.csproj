@@ -46,6 +46,7 @@
     <Compile Include="Class\LevelScripts\Level.cs" />
     <Compile Include="Class\LevelScripts\Path.cs" />
     <Compile Include="Class\PlayerScripts\Player.cs" />
+    <Compile Include="Class\Screen\BezierCurveEditorScreen.cs" />
     <Compile Include="Class\Screen\GameScreen.cs" />
     <Compile Include="Class\Screen\MenuScreen.cs" />
     <Compile Include="Class\Screen\Screen.cs" />

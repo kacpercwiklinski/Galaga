@@ -21,6 +21,7 @@ namespace Galaga
         SplashScreen mSplashScreen;
         Screen mCurrentScreen;
         MenuScreen mMenuScreen;
+        BezierCurveEditorScreen mBezierCurveEditorScreen;
         GameScreen mGameScreen;
 
         public const int WIDTH = 1280;
@@ -63,8 +64,13 @@ namespace Galaga
             mSplashScreen = new SplashScreen(this.Content, new EventHandler(ControllerDetectScreenEvent));
             mMenuScreen = new MenuScreen(this.Content, new EventHandler(MenuScreenEvent));
             mGameScreen = new GameScreen(this.Content, new EventHandler(GameScreenEvent));
+            mBezierCurveEditorScreen = new BezierCurveEditorScreen(this.Content, new EventHandler(BezierCurveEditorScreenEvent));
 
             mCurrentScreen = mSplashScreen;
+        }
+
+        private void BezierCurveEditorScreenEvent(object sender, EventArgs e) {
+            mCurrentScreen = mMenuScreen;
         }
 
         private void GameScreenEvent(object sender, EventArgs e) {
@@ -76,7 +82,8 @@ namespace Galaga
             if (chosenOption.label.Equals("Play")) {
                 mCurrentScreen = mGameScreen;
                 mGameScreen.StartGame();
-
+            } else if (chosenOption.label.Equals("Bezier Editor")) {
+                mCurrentScreen = mBezierCurveEditorScreen;
             } else if (chosenOption.label.Equals("Exit")) {
                 Exit();
             }
