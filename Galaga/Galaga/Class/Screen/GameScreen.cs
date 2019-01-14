@@ -20,10 +20,11 @@ namespace Galaga.Class.Screen {
         public GameScreen(ContentManager theContent, EventHandler theScreenEvent) : base(theScreenEvent) {
             player = new Player();
             level = new Level();
-            testEnemy1 = new TestEnemy(0f,level);
+            testEnemy1 = new TestEnemy(level);
         }
 
         public override void Update(GameTime theTime) {
+            level.update(theTime);
             player.Update(theTime);
             testEnemy1.Update(theTime);
 
@@ -33,6 +34,10 @@ namespace Galaga.Class.Screen {
         public override void Draw(SpriteBatch theBatch) {
             player.Draw(theBatch);
             testEnemy1.Draw(theBatch);
+            level.draw(theBatch);
+
+            // Draw debug mouse point
+            theBatch.Draw(Game1.textureManager.point, new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y), Color.White);
 
             theBatch.Draw(Game1.textureManager.centerLine, new Vector2(Game1.WIDTH / 2, 0), Color.White);
             base.Draw(theBatch);

@@ -1,16 +1,43 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaga.Class.EnemyScripts;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Galaga.Class.LevelScripts {
     public class Level {
-        public int levelIndex = 1;
+
+        const float SPAWN_RATE = 0.3f;
+
+        public int wave = 1;
+        List<TestEnemy> enemies;
+        float spawnCounter = SPAWN_RATE;
 
         public Level() {
-            initializeLevel(levelIndex);
+            enemies = new List<TestEnemy>();
+            initializeLevel(wave);
+        }
+
+        public void update(GameTime theTime) { 
+            spawnEnemies(wave);
+            spawnCounter -= (float)theTime.ElapsedGameTime.TotalSeconds;
+
+            // Update Enemies
+            enemies.ForEach((enemy) => {
+                enemy.Update(theTime);
+            });
+
+        }
+
+        public void draw(SpriteBatch theBatch) {
+            // Draw Enemies
+            enemies.ForEach((enemy) => {
+                enemy.Draw(theBatch);
+            });
         }
 
         private void initializeLevel(int levelIndex) {
@@ -18,14 +45,16 @@ namespace Galaga.Class.LevelScripts {
 
             setupPath(levelIndex);
             spawnEnemies(levelIndex);
+            
         }
 
         private void setupPath(int levelIndex) {
             switch (levelIndex) {
                 case 1:
-                    Paths.path1.setupCurve(0,new Vector2(0, 289), new Vector2(281, 166), new Vector2(75, 121), new Vector2(209, 270));
-                    Paths.path1.setupCurve(1, new Vector2(209, 270), new Vector2(416, 462), new Vector2(778, 159), new Vector2(433, 108));
-                    Paths.path1.setupCurve(2, new Vector2(433, 108), new Vector2(1231, 176), new Vector2(1106, 656), new Vector2(929, 250));
+                    Paths.path1.setupCurve(0, new Vector2(540, 2), new Vector2(538, 183), new Vector2(703, 523), new Vector2(368, 513));
+                    Paths.path1.setupCurve(1, new Vector2(368, 513), new Vector2(196, 558), new Vector2(7, 504), new Vector2(39, 195));
+                    Paths.path1.setupCurve(2, new Vector2(39, 195), new Vector2(191, 97), new Vector2(438, 169), new Vector2(528, 363));
+                    Paths.path1.setupPointsList();
                     break;
                 case 2:
                     Paths.path2.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());
@@ -45,8 +74,8 @@ namespace Galaga.Class.LevelScripts {
             }
         }
 
-        public Path getCurrentLevelPath() {
-            switch (levelIndex) {
+        public Path getCurrentWavePath() {
+            switch (wave) {
                 case 1:
                     return Paths.path1;
                 case 2:
@@ -60,9 +89,13 @@ namespace Galaga.Class.LevelScripts {
             }
         }
 
-        private void spawnEnemies(int levelIndex) {
-            switch (levelIndex) {
+        private void spawnEnemies(int waveIndex) {
+            switch (waveIndex) {
                 case 1:
+                    if (spawnCounter <= 0f) {
+                        enemies.Add(new TestEnemy(this));
+                        spawnCounter = SPAWN_RATE;
+                    }
                     break;
                 case 2:
                     break;
