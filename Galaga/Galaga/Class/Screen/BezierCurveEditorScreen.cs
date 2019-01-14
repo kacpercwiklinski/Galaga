@@ -93,8 +93,9 @@ namespace Galaga.Class.Screen {
                 }
             }
             file.WriteLine("----- Curve - " + DateTime.Now.ToString("h:mm:ss tt") + " -----");
-            file.WriteLine("     *****     ");
-            file.WriteLine("     *****     ");
+            file.WriteLine("     ***** CODE *****     ");
+            file.WriteLine(".setupCurve(0,new Vector2(" + bezierCurve.ElementAt(0).X + "," + bezierCurve.ElementAt(0).Y + " ), new Vector2(" + bezierCurve.ElementAt(1).X + "," + bezierCurve.ElementAt(1).Y + "), new Vector2(" + bezierCurve.ElementAt(2).X + "," + bezierCurve.ElementAt(2).Y +  "), new Vector2(" + bezierCurve.ElementAt(3).X + "," + bezierCurve.ElementAt(3).Y +  "));");
+            file.WriteLine("     ***** CODE *****    ");
             file.Close();
         }
     }

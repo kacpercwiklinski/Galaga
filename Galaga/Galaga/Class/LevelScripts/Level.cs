@@ -1,52 +1,81 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Galaga.Class.EnemyScripts;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Galaga.Class.LevelScripts {
     public class Level {
-        public int levelIndex = 1;
+
+        const float SPAWN_RATE = 0.3f;
+
+        public int wave = 3;
+        List<TestEnemy> enemies;
+        float spawnCounter = SPAWN_RATE;
 
         public Level() {
-            initializeLevel(levelIndex);
+            enemies = new List<TestEnemy>();
+            initializeLevel(wave);
+        }
+
+        public void update(GameTime theTime) { 
+            spawnEnemies(wave);
+            spawnCounter -= (float)theTime.ElapsedGameTime.TotalSeconds;
+
+            // Update Enemies
+            enemies.ForEach((enemy) => {
+                enemy.Update(theTime);
+            });
+
+        }
+
+        public void draw(SpriteBatch theBatch) {
+            // Draw Enemies
+            enemies.ForEach((enemy) => {
+                enemy.Draw(theBatch);
+            });
         }
 
         private void initializeLevel(int levelIndex) {
             if (levelIndex == 0) return;
 
-            setupPath(levelIndex);
+            setupPaths();
             spawnEnemies(levelIndex);
+            
         }
 
-        private void setupPath(int levelIndex) {
-            switch (levelIndex) {
-                case 1:
-                    Paths.path1.setupCurve(0,new Vector2(0, 289), new Vector2(281, 166), new Vector2(75, 121), new Vector2(209, 270));
-                    Paths.path1.setupCurve(1, new Vector2(209, 270), new Vector2(416, 462), new Vector2(778, 159), new Vector2(433, 108));
-                    Paths.path1.setupCurve(2, new Vector2(433, 108), new Vector2(1231, 176), new Vector2(1106, 656), new Vector2(929, 250));
-                    break;
-                case 2:
-                    Paths.path2.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    Paths.path2.setupCurve(1, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    Paths.path2.setupCurve(2, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    break;
-                case 3:
-                    Paths.path3.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    Paths.path3.setupCurve(1, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    Paths.path3.setupCurve(2, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    break;
-                case 4:
-                    Paths.path4.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    Paths.path4.setupCurve(1, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    Paths.path4.setupCurve(2, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-                    break;
-            }
+        private void setupPaths() {
+            // Path 1
+            Paths.path1.setupCurve(0, new Vector2(540, 2), new Vector2(538, 183), new Vector2(703, 523), new Vector2(368, 513));
+            Paths.path1.setupCurve(1, new Vector2(368, 513), new Vector2(196, 558), new Vector2(7, 504), new Vector2(39, 195));
+            Paths.path1.setupCurve(2, new Vector2(39, 195), new Vector2(191, 97), new Vector2(438, 169), new Vector2(528, 363));
+            Paths.path1.setupPointsList();
+
+            // Path 2
+            Paths.path2.setupCurve(0, new Vector2(0, 144), new Vector2(104, 52), new Vector2(200, 49), new Vector2(358, 204));
+            Paths.path2.setupCurve(1, new Vector2(358, 204), new Vector2(462, 380), new Vector2(579, 396), new Vector2(797, 225));
+            Paths.path2.setupCurve(2, new Vector2(797, 225), new Vector2(670, 104), new Vector2(428, 68), new Vector2(395, 205));
+            Paths.path2.setupPointsList();
+
+            // Path 3
+            Paths.path3.setupCurve(0, new Vector2(0, 485), new Vector2(294, 280), new Vector2(43, 260), new Vector2(179, 201));
+            Paths.path3.setupCurve(1, new Vector2(179, 201), new Vector2(385, 86), new Vector2(509, 197), new Vector2(501, 320));
+            Paths.path3.setupCurve(2, new Vector2(501, 320), new Vector2(485, 420), new Vector2(375, 448), new Vector2(298, 264));
+            Paths.path3.setupPointsList();
+
+            // Path 4
+            Paths.path4.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());
+            Paths.path4.setupCurve(1, new Vector2(), new Vector2(), new Vector2(), new Vector2());
+            Paths.path4.setupCurve(2, new Vector2(), new Vector2(), new Vector2(), new Vector2());
+            Paths.path4.setupPointsList();
         }
 
-        public Path getCurrentLevelPath() {
-            switch (levelIndex) {
+        public Path getCurrentWavePath() {
+            switch (wave) {
                 case 1:
                     return Paths.path1;
                 case 2:
@@ -60,8 +89,8 @@ namespace Galaga.Class.LevelScripts {
             }
         }
 
-        private void spawnEnemies(int levelIndex) {
-            switch (levelIndex) {
+        private void spawnEnemies(int waveIndex) {
+            switch (waveIndex) {
                 case 1:
                     break;
                 case 2:
@@ -71,6 +100,13 @@ namespace Galaga.Class.LevelScripts {
                 case 4:
                     break;
             }
+
+            if (spawnCounter <= 0f) {
+                enemies.Add(new TestEnemy(this, true));
+                enemies.Add(new TestEnemy(this, false));
+                spawnCounter = SPAWN_RATE;
+            }
+            
         }
     }
 }
