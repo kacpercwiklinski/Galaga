@@ -24,7 +24,6 @@ namespace Galaga.Class {
             bullets = new List<Bullet>();
             playerTexture = Game1.textureManager.player;
             pos = new Vector2(Game1.WIDTH / 2, Game1.HEIGHT - Game1.HEIGHT / 10);
-            Debug.WriteLine(this.pos.X);
         }
 
         public void Update(GameTime theTime) {
@@ -39,7 +38,7 @@ namespace Galaga.Class {
                 bullet.update(theTime);
             });
 
-                //bullets = bullets.FindAll((bullet) => bullet.onScreen);
+            bullets = bullets.FindAll((bullet) => bullet.onScreen).FindAll((bullet)=> bullet.isTriggerable);
             }
 
         public void Draw(SpriteBatch theBatch) {
@@ -83,18 +82,17 @@ namespace Galaga.Class {
             public Boolean onScreen = true;
             float speed = 800f;
             public Rectangle boundingBox;
-            public bool isVisible;
+            public bool isVisible = true;
+            public bool isTriggerable = true;
 
             public Bullet(Vector2 playerPos) {
                 this.pos = new Vector2(playerPos.X - Game1.textureManager.bullet.Width/2,playerPos.Y);
-                this.isVisible = false;
-
             }
 
             public void update(GameTime theTime) {
                 this.pos.Y -= speed * (float)theTime.ElapsedGameTime.TotalSeconds;
 
-                boundingBox = new Rectangle((int)pos.X, (int)pos.Y, 9, 24);
+                boundingBox = new Rectangle((int)pos.X, (int)pos.Y, Game1.textureManager.bullet.Width, Game1.textureManager.bullet.Height);
 
                 if (this.pos.Y < 0) this.onScreen = false;
             }

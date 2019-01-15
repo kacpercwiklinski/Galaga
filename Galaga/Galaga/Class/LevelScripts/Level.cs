@@ -11,24 +11,21 @@ using System.Threading.Tasks;
 
 namespace Galaga.Class.LevelScripts {
     public class Level {
-
-    
-
+        
         const float SPAWN_RATE = 0.7f;
         const int MAX_ENEMIES = 9;
+        int spawnedEnemies = 0;
 
         int stage = 1;
 
         public int wave = 1;
-        private List<Enemy> enemies = new List<Enemy>();
+        public List<Enemy> enemies = new List<Enemy>();
         float spawnCounter = SPAWN_RATE;
 
         public List<Vector2> firstWaveEndpoints;
         public List<Vector2> secondWaveEndpoints;
         public List<Vector2> thirdWaveEndpoints;
         public List<Vector2> fourthWaveEndpoints;
-
-        internal List<Enemy> Enemies { get => enemies; set => enemies = value; }
 
         public Level() {
             
@@ -44,24 +41,18 @@ namespace Galaga.Class.LevelScripts {
             spawnEnemies();
             spawnCounter -= (float)theTime.ElapsedGameTime.TotalSeconds;
 
+            // Remove destroyed enemies
+            enemies = enemies.FindAll((enemy) => enemy.isVisible);
+
             // Update Enemies
-            Enemies.ForEach((enemy) =>
-            {
+            enemies.ForEach((enemy) =>{
                 enemy.Update(theTime);
             });
-
-
-
-           
-
-
-
-
         }
 
         public void draw(SpriteBatch theBatch) {
             // Draw Enemies
-            Enemies.ForEach((enemy) => {
+            enemies.ForEach((enemy) => {
                 enemy.Draw(theBatch);
             });
         }
@@ -75,8 +66,9 @@ namespace Galaga.Class.LevelScripts {
         }
 
         public void nextWave() {
-            Enemies.Clear();
-            if(wave + 1 == 5) {
+            enemies.Clear();
+            spawnedEnemies = 0;
+            if (wave + 1 == 5) {
                 setupEndpoints();
                 nextStage();
             } else {
@@ -253,10 +245,11 @@ namespace Galaga.Class.LevelScripts {
         }
 
         private void spawnEnemies() {
-            if (spawnCounter <= 0f && Enemies.Count() <= MAX_ENEMIES*2) {
-                Enemies.Add(new Enemy(this, true));
-                Enemies.Add(new Enemy(this, false));
+            if (spawnCounter <= 0f && spawnedEnemies <= MAX_ENEMIES*2) {
+                enemies.Add(new Enemy(this, true));
+                enemies.Add(new Enemy(this, false));
                 spawnCounter = SPAWN_RATE;
+                spawnedEnemies += 2;
             }
         }
     }

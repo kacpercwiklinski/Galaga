@@ -41,63 +41,39 @@ namespace Galaga.Class.Screen {
 
 
             // Aktualizacja przeciwnikow i test kolizji
-            foreach (Enemy e in level.Enemies)
+            foreach (Enemy e in level.enemies)
             {
-                
-
                 //sprawdzenie kolzji pocisku gracza z przeciwnikiem
                 for (int i = 0; i < player.bullets.Count; i++)
                 {
-                    if (player.bullets[i].boundingBox.Intersects(e.boundingBox))
+                    if (player.bullets[i].boundingBox.Intersects(e.boundingBox) && player.bullets[i].isTriggerable)
                     {
                         explosionsList.Add(new Explosion(Game1.textureManager.explosion, new Vector2(e.pos.X, e.pos.Y)));
                         player.bullets[i].isVisible = false;
+                        player.bullets[i].isTriggerable = false;
                         e.isVisible = false;
-                        Console.WriteLine("cze");
-
-
                     }
                 }
-
-                e.Update(theTime);
-
-
-                foreach (Explosion explosion in explosionsList)
-                {
-                    explosion.Update(theTime);
-                }
-
-                //usuwanie eksplozji
-                for (int i = 0; i < explosionsList.Count; i++)
-                {
-                    if (!explosionsList[i].isVisible)
-                    {
-                        explosionsList.RemoveAt(i);
-                        i--;
-                    }
-                }
-
-
-
             }
-            
-            
+
+            foreach (Explosion explosion in explosionsList) {
+                explosion.Update(theTime);
+            }
+
+            //usuwanie eksplozji
+            explosionsList = explosionsList.FindAll((explosion) => explosion.isVisible);
+
             //uswanie przeciwnikow
-            for (int i = 0; i < level.Enemies.Count; i++)
+
+            for (int i = 0; i < level.enemies.Count; i++)
             {
-                if (!level.Enemies[i].isVisible)
+                if (!level.enemies[i].isVisible)
                 {
-                    level.Enemies.RemoveAt(i);
+                    level.enemies.RemoveAt(i);
                     i--;
                 }
             }
             
-
-            //jesli ktorys z przeciwnikow zostanie zniszczony, usun go z listy
-
-
-
-
             base.Update(theTime);
         }
 
@@ -107,14 +83,6 @@ namespace Galaga.Class.Screen {
             background.Draw(theBatch);
             player.Draw(theBatch);
             level.draw(theBatch);
-
-
-
-
-            foreach (Enemy e in level.Enemies)
-            {
-                e.Draw(theBatch);
-            }
 
             foreach (Explosion explosion in explosionsList)
             {

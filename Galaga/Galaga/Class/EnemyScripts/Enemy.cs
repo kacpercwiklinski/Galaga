@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Galaga.Class.EnemyScripts {
-    class Enemy {
+    public class Enemy {
 
         Texture2D texture;
         public Vector2 pos;
@@ -48,6 +48,9 @@ namespace Galaga.Class.EnemyScripts {
         }
 
         public void Update(GameTime theTime) {
+            
+            boundingBox = new Rectangle((int)pos.X - texture.Width/2, (int)pos.Y, texture.Width, texture.Height);
+
             counter += (float)theTime.ElapsedGameTime.TotalSeconds;
 
             Animator.animate(theTime, ref this.texture, Game1.textureManager.enemy1, 0.4f, ref counter, true);
@@ -55,19 +58,6 @@ namespace Galaga.Class.EnemyScripts {
             var mouseState = Mouse.GetState();
 
             followPoint(theTime);
-
-
-
-            /*
-            this.pos = level.getCurrentLevelPath().getPoint(t);
-            t += 0.005f;
-            t = t > 3 ? 0 : t;
-            */
-
-
-            //Aktualizacja Bundingbox
-            boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
-
         }
 
         public void Draw(SpriteBatch theBatch) {
