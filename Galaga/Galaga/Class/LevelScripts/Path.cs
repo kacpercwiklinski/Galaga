@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Galaga.Class.LevelScripts {
     public class Path {
         public Vector2 startingPoint;
+        public Vector2 lastPoint;
         public List<Vector2> points;
         float tOffset = 0.1f;
         List<Vector2> firstCurve;
@@ -43,6 +44,7 @@ namespace Galaga.Class.LevelScripts {
                     thirdCurve.Add(controlPoint1);
                     thirdCurve.Add(controlPoint2);
                     thirdCurve.Add(end);
+                    lastPoint = end;
                     break;
                 default:
                     return;
@@ -71,7 +73,8 @@ namespace Galaga.Class.LevelScripts {
             return point;
         }
 
-        public Vector2 getNextFollowedPoint(int pointIdx) {
+        public Vector2 getNextFollowedPoint(int pointIdx)
+        {
             if (pointIdx > points.Count() - 1) return points.Last();
             return points.ElementAt(pointIdx);
         }

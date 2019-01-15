@@ -39,6 +39,10 @@ namespace Galaga.Class.Screen {
             // Draw debug mouse point
             theBatch.Draw(Game1.textureManager.point, new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y), Color.White);
 
+            level.firstWaveEndpoints.ForEach((endpoint) => {
+                theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
+            });
+
             theBatch.Draw(Game1.textureManager.centerLine, new Vector2(Game1.WIDTH / 2, 0), Color.White);
             base.Draw(theBatch);
         }

@@ -11,14 +11,24 @@ using System.Threading.Tasks;
 namespace Galaga.Class.LevelScripts {
     public class Level {
 
-        const float SPAWN_RATE = 0.3f;
+        const float SPAWN_RATE = 0.7f;
 
-        public int wave = 3;
+        public int wave = 1;
         List<TestEnemy> enemies;
         float spawnCounter = SPAWN_RATE;
+        int maxEnemies = 5;
+
+        public List<Vector2> firstWaveEndpoints;
+        List<Vector2> secondWaveEndpoints;
+        List<Vector2> thirdWaveEndpoints;
+        List<Vector2> fourthWaveEndpoints;
 
         public Level() {
             enemies = new List<TestEnemy>();
+            firstWaveEndpoints = new List<Vector2>();
+            secondWaveEndpoints = new List<Vector2>();
+            thirdWaveEndpoints = new List<Vector2>();
+            fourthWaveEndpoints = new List<Vector2>();
             initializeLevel(wave);
         }
 
@@ -45,7 +55,7 @@ namespace Galaga.Class.LevelScripts {
 
             setupPaths();
             spawnEnemies(levelIndex);
-            
+            setupEndpoints();
         }
 
         private void setupPaths() {
@@ -74,6 +84,41 @@ namespace Galaga.Class.LevelScripts {
             Paths.path4.setupPointsList();
         }
 
+        private void setupEndpoints()
+        {
+            int xOffsetIdx = 0;
+            float leftMargin = 200;
+            float offset = (Game1.WIDTH - (2 * leftMargin)) / 10;
+            // First wave
+            for(int i = 0; i < 20; i++) {
+                if(i < 10) {
+                    firstWaveEndpoints.Add(new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 3));
+                    if(i == 9) {
+                        xOffsetIdx = -1;
+                    }
+                }
+                else {
+                    firstWaveEndpoints.Add(new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 3 + 100));
+                }
+                xOffsetIdx++;
+            }
+
+            // Second wave
+            for (int i = 0; i < 10; i++) {
+
+            }
+
+            // Third wave
+            for (int i = 0; i < 10; i++) {
+
+            }
+
+            // Fourth wave
+            for (int i = 0; i < 10; i++) {
+
+            }
+        }
+
         public Path getCurrentWavePath() {
             switch (wave) {
                 case 1:
@@ -89,6 +134,25 @@ namespace Galaga.Class.LevelScripts {
             }
         }
 
+        public Vector2 getEndpoint()
+        {
+            Vector2 endpoint;
+            switch (wave) {
+                case 1:
+                    endpoint = firstWaveEndpoints.First();
+                    firstWaveEndpoints.Remove(endpoint);
+                    return endpoint;
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+            }
+            return new Vector2();
+        }
+
         private void spawnEnemies(int waveIndex) {
             switch (waveIndex) {
                 case 1:
@@ -101,7 +165,7 @@ namespace Galaga.Class.LevelScripts {
                     break;
             }
 
-            if (spawnCounter <= 0f) {
+            if (spawnCounter <= 0f && enemies.Count() < maxEnemies) {
                 enemies.Add(new TestEnemy(this, true));
                 enemies.Add(new TestEnemy(this, false));
                 spawnCounter = SPAWN_RATE;

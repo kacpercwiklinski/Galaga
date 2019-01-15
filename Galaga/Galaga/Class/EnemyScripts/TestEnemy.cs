@@ -20,6 +20,7 @@ namespace Galaga.Class.EnemyScripts {
         float counter = 0f;
 
         Boolean reversed = false;
+        Boolean finishedPath = false;
 
         private float angle = 0;
 
@@ -67,14 +68,18 @@ namespace Galaga.Class.EnemyScripts {
             
             float distance = Vector2.Distance(pos, followedPoint);
 
-            if(distance < 20f || this.pos == followedPoint) {
+            if(distance < 20f || this.pos == followedPoint && !finishedPath) {
                 followedPoint = level.getCurrentWavePath().getNextFollowedPoint(followedPointIdx);
+                if(followedPoint == level.getCurrentWavePath().lastPoint) {
+                    finishedPath = true;
+                }
                 if (reversed) {
                     float reflectedX = followedPoint.X + (2 * (Game1.WIDTH / 2 - followedPoint.X));
                     followedPoint = new Vector2(reflectedX, followedPoint.Y);
                 }
                 followedPointIdx++;
             } else {
+                followedPoint = level.getEndpoint();
                 this.pos += Vector2.Multiply(dir, this.speed * (float)theTime.ElapsedGameTime.TotalSeconds);
             }
 
