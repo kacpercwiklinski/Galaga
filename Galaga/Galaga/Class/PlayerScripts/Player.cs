@@ -75,6 +75,7 @@ namespace Galaga.Class {
 
         private void shoot() {
             bullets.Add(new Bullet(pos));
+            Game1.audioManager.shoot.Play(0.7f, -1.0f, 0.0f);
         }
 
         public class Bullet {
