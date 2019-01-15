@@ -20,13 +20,15 @@ namespace Galaga.Class.Screen {
         List<Explosion> explosionsList = new List<Explosion>();
         Background background;
 
+        public static int score = 0;
+        private SpriteFont scoreFont;
+
 
         public GameScreen(ContentManager theContent, EventHandler theScreenEvent) : base(theScreenEvent) {
             player = new Player(this);
             level = new Level();
             background = new Background();
-            
-          
+            scoreFont = theContent.Load<SpriteFont>("font/scoreFont");
         }
 
         public override void Update(GameTime theTime) {
@@ -62,6 +64,8 @@ namespace Galaga.Class.Screen {
             background.Draw(theBatch);
             player.Draw(theBatch);
             level.draw(theBatch);
+
+            theBatch.DrawString(scoreFont, "" + score, new Vector2(630, 545), Color.Yellow);
 
             foreach (Explosion explosion in explosionsList){
                 explosion.Draw(theBatch);
