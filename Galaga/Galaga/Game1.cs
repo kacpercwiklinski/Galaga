@@ -17,6 +17,7 @@ namespace Galaga
         SpriteBatch spriteBatch;
 
         public static TextureManager textureManager;
+        public static AudioManager audioManager;
 
         public static Boolean debugMode = false;
 
@@ -26,6 +27,7 @@ namespace Galaga
         BezierCurveEditorScreen mBezierCurveEditorScreen;
         GameScreen mGameScreen;
         GameOverScreen mGameOverScreen;
+
 
         public const int WIDTH = 1280;
         public const int HEIGHT = 720;
@@ -63,6 +65,7 @@ namespace Galaga
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             textureManager = new TextureManager(this.Content);
+            audioManager = new AudioManager(this.Content);
 
             mSplashScreen = new SplashScreen(this.Content, new EventHandler(ControllerDetectScreenEvent));
             mMenuScreen = new MenuScreen(this.Content, new EventHandler(MenuScreenEvent));
