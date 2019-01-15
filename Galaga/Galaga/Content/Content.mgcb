@@ -99,18 +99,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Enemies/Enemy1/enemy1_2.png
 
-#begin Textures/Enemies/Enemy1/enemy1_3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Enemies/Enemy1/enemy1_3.png
-
 #begin Textures/Enemies/Enemy2/enemy2_1.png
 /importer:TextureImporter
 /processor:TextureProcessor

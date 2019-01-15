@@ -57,6 +57,7 @@ namespace Galaga.Class.LevelScripts {
                 points.Add(getPoint(tempT));
                 tempT += tOffset;
             }
+            points.Add(lastPoint);
         }
 
         public Vector2 getPoint(float t) {

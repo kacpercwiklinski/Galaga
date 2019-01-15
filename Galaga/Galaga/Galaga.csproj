@@ -42,7 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class\EnemyScripts\TestEnemy.cs" />
+    <Compile Include="Class\EnemyScripts\Enemy.cs" />
     <Compile Include="Class\LevelScripts\Level.cs" />
     <Compile Include="Class\LevelScripts\Path.cs" />
     <Compile Include="Class\PlayerScripts\Player.cs" />

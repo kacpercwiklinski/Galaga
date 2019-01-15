@@ -24,5 +24,9 @@ namespace Galaga.Class.Utils {
 
 	            return new Vector2(resX, resY);
 	    }
+
+        public static float getReflectedX(float x) {
+            return x + (2 * (Game1.WIDTH / 2 - x));
+        }
     }
 }

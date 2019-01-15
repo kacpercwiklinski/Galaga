@@ -1,4 +1,5 @@
 ﻿using Galaga.Class.EnemyScripts;
+using Galaga.Class.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,19 +13,19 @@ namespace Galaga.Class.LevelScripts {
     public class Level {
 
         const float SPAWN_RATE = 0.7f;
+        const int MAX_ENEMIES = 9;
 
-        public int wave = 1;
-        List<TestEnemy> enemies;
+        public int wave = 4;
+        List<Enemy> enemies;
         float spawnCounter = SPAWN_RATE;
-        int maxEnemies = 5;
 
         public List<Vector2> firstWaveEndpoints;
-        List<Vector2> secondWaveEndpoints;
-        List<Vector2> thirdWaveEndpoints;
-        List<Vector2> fourthWaveEndpoints;
+        public List<Vector2> secondWaveEndpoints;
+        public List<Vector2> thirdWaveEndpoints;
+        public List<Vector2> fourthWaveEndpoints;
 
         public Level() {
-            enemies = new List<TestEnemy>();
+            enemies = new List<Enemy>();
             firstWaveEndpoints = new List<Vector2>();
             secondWaveEndpoints = new List<Vector2>();
             thirdWaveEndpoints = new List<Vector2>();
@@ -33,7 +34,7 @@ namespace Galaga.Class.LevelScripts {
         }
 
         public void update(GameTime theTime) { 
-            spawnEnemies(wave);
+            spawnEnemies();
             spawnCounter -= (float)theTime.ElapsedGameTime.TotalSeconds;
 
             // Update Enemies
@@ -51,10 +52,10 @@ namespace Galaga.Class.LevelScripts {
         }
 
         private void initializeLevel(int levelIndex) {
-            if (levelIndex == 0) return;
+            wave = 1;
 
             setupPaths();
-            spawnEnemies(levelIndex);
+            spawnEnemies();
             setupEndpoints();
         }
 
@@ -78,9 +79,9 @@ namespace Galaga.Class.LevelScripts {
             Paths.path3.setupPointsList();
 
             // Path 4
-            Paths.path4.setupCurve(0, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-            Paths.path4.setupCurve(1, new Vector2(), new Vector2(), new Vector2(), new Vector2());
-            Paths.path4.setupCurve(2, new Vector2(), new Vector2(), new Vector2(), new Vector2());
+            Paths.path4.setupCurve(0, new Vector2(0, 705), new Vector2(281, 666), new Vector2(584, 594), new Vector2(546, 355));
+            Paths.path4.setupCurve(1, new Vector2(546, 355), new Vector2(520, 175), new Vector2(257, 155), new Vector2(52, 243));
+            Paths.path4.setupCurve(2, new Vector2(52, 243), new Vector2(228, 398), new Vector2(487, 403), new Vector2(563, 233));
             Paths.path4.setupPointsList();
         }
 
@@ -92,31 +93,93 @@ namespace Galaga.Class.LevelScripts {
             // First wave
             for(int i = 0; i < 20; i++) {
                 if(i < 10) {
-                    firstWaveEndpoints.Add(new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 3));
+                    firstWaveEndpoints.Add(new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 6));
                     if(i == 9) {
                         xOffsetIdx = -1;
                     }
                 }
                 else {
-                    firstWaveEndpoints.Add(new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 3 + 100));
+                    firstWaveEndpoints.Add(new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 6 + 100));
                 }
                 xOffsetIdx++;
             }
 
-            // Second wave
-            for (int i = 0; i < 10; i++) {
+            xOffsetIdx = 0;
+            leftMargin = 100;
+            offset = (Game1.WIDTH/2 - (3 * leftMargin)) / 5;
 
+            // Second wave
+            for (int i = 0; i < 20; i++) {
+                if(i < 10) {
+                    if(i < 5) {
+                        Vector2 tempPoint = new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 6);
+                        secondWaveEndpoints.Add(tempPoint);
+                        secondWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(tempPoint.X),tempPoint.Y));
+                        if (i == 4) {
+                            xOffsetIdx = -1;
+                        }
+                    } else {
+                        Vector2 tempPoint = new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT / 6 + 75);
+                        secondWaveEndpoints.Add(tempPoint);
+                        secondWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(tempPoint.X), tempPoint.Y));
+                    }
+                }
+                xOffsetIdx++;
             }
 
-            // Third wave
-            for (int i = 0; i < 10; i++) {
+            xOffsetIdx = 0;
+            leftMargin = 100;
+            offset = (Game1.WIDTH / 2 - (3 * leftMargin)) / 5;
 
+            // Third wave
+            for (int i = 0; i < 20; i++) {
+                if (i < 10) {
+                    if (i < 5) {
+                        Vector2 tempPoint = new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT - Game1.HEIGHT / 2);
+                        thirdWaveEndpoints.Add(tempPoint);
+                        thirdWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(tempPoint.X), tempPoint.Y));
+                        if (i == 4) {
+                            xOffsetIdx = -1;
+                        }
+                    } else {
+                        Vector2 tempPoint = new Vector2(leftMargin + xOffsetIdx * offset, Game1.HEIGHT - Game1.HEIGHT / 2 + 75);
+                        thirdWaveEndpoints.Add(tempPoint);
+                        thirdWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(tempPoint.X), tempPoint.Y));
+                    }
+                }
+                xOffsetIdx++;
             }
 
             // Fourth wave
-            for (int i = 0; i < 10; i++) {
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH/4,100));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4), 100));
 
-            }
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 - 75, 175));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 - 75), 175));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 + 75, 175));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 + 75), 175));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4, 250));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4), 250));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 - 150, 100));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 - 150), 100));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 + 150, 100));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 + 150), 100));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 - 150, 250));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 - 150), 250));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 + 150, 250));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 + 150), 250));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 - 225, 175));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 - 225), 175));
+
+            fourthWaveEndpoints.Add(new Vector2(Game1.WIDTH / 4 + 225, 175));
+            fourthWaveEndpoints.Add(new Vector2(BezierCurve.getReflectedX(Game1.WIDTH / 4 + 225), 175));
         }
 
         public Path getCurrentWavePath() {
@@ -142,35 +205,29 @@ namespace Galaga.Class.LevelScripts {
                     endpoint = firstWaveEndpoints.First();
                     firstWaveEndpoints.Remove(endpoint);
                     return endpoint;
-                    break;
                 case 2:
-                    break;
+                    endpoint = secondWaveEndpoints.First();
+                    secondWaveEndpoints.Remove(endpoint);
+                    return endpoint;
                 case 3:
-                    break;
+                    endpoint = thirdWaveEndpoints.First();
+                    thirdWaveEndpoints.Remove(endpoint);
+                    return endpoint;
                 case 4:
-                    break;
+                    endpoint = fourthWaveEndpoints.First();
+                    fourthWaveEndpoints.Remove(endpoint);
+                    return endpoint;
+                default:
+                    return new Vector2();
             }
-            return new Vector2();
         }
 
-        private void spawnEnemies(int waveIndex) {
-            switch (waveIndex) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-            }
-
-            if (spawnCounter <= 0f && enemies.Count() < maxEnemies) {
-                enemies.Add(new TestEnemy(this, true));
-                enemies.Add(new TestEnemy(this, false));
+        private void spawnEnemies() {
+            if (spawnCounter <= 0f && enemies.Count() <= MAX_ENEMIES*2) {
+                enemies.Add(new Enemy(this, true));
+                enemies.Add(new Enemy(this, false));
                 spawnCounter = SPAWN_RATE;
             }
-            
         }
     }
 }

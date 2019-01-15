@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Galaga.Class.EnemyScripts {
-    class TestEnemy {
+    class Enemy {
 
         Texture2D texture;
         Vector2 pos;
@@ -21,16 +21,18 @@ namespace Galaga.Class.EnemyScripts {
 
         Boolean reversed = false;
         Boolean finishedPath = false;
+        Boolean end = false;
+        Boolean onEndPoint = false;
 
         private float angle = 0;
 
         Vector2 followedPoint;
         int followedPointIdx = 0;
 
-        public TestEnemy(Level _level, bool _reversed) {
+        public Enemy(Level _level, bool _reversed) {
             level = _level;
             reversed = _reversed;
-            texture = Game1.textureManager.enemy2.First();
+            texture = Game1.textureManager.enemy1.First();
             followedPoint = level.getCurrentWavePath().getNextFollowedPoint(followedPointIdx);
             followedPointIdx++;
             pos = level.getCurrentWavePath().startingPoint;
@@ -44,7 +46,7 @@ namespace Galaga.Class.EnemyScripts {
         public void Update(GameTime theTime) {
             counter += (float)theTime.ElapsedGameTime.TotalSeconds;
 
-            Animator.animate(theTime, ref this.texture, Game1.textureManager.enemy2, 0.4f, ref counter, true);
+            Animator.animate(theTime, ref this.texture, Game1.textureManager.enemy1, 0.4f, ref counter, true);
 
             var mouseState = Mouse.GetState();
 
@@ -68,7 +70,7 @@ namespace Galaga.Class.EnemyScripts {
             
             float distance = Vector2.Distance(pos, followedPoint);
 
-            if(distance < 20f || this.pos == followedPoint && !finishedPath) {
+            if(distance < 20f && !finishedPath) {
                 followedPoint = level.getCurrentWavePath().getNextFollowedPoint(followedPointIdx);
                 if(followedPoint == level.getCurrentWavePath().lastPoint) {
                     finishedPath = true;
@@ -79,8 +81,18 @@ namespace Galaga.Class.EnemyScripts {
                 }
                 followedPointIdx++;
             } else {
-                followedPoint = level.getEndpoint();
-                this.pos += Vector2.Multiply(dir, this.speed * (float)theTime.ElapsedGameTime.TotalSeconds);
+                if (finishedPath && !end) {
+                    followedPoint = level.getEndpoint();
+                    end = true;
+                }
+                if (!onEndPoint) {
+                    this.pos += Vector2.Multiply(dir, this.speed * (float)theTime.ElapsedGameTime.TotalSeconds);
+                    if(Vector2.Distance(followedPoint,this.pos) < 5f && end) {
+                        onEndPoint = true;
+                    }
+                } else {
+                    angle = (float)Math.PI;
+                }
             }
 
         }

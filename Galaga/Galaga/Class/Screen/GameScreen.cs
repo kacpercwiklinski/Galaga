@@ -15,31 +15,42 @@ namespace Galaga.Class.Screen {
 
         public static Player player;
         public Level level;
-        TestEnemy testEnemy1;
 
         public GameScreen(ContentManager theContent, EventHandler theScreenEvent) : base(theScreenEvent) {
             player = new Player();
             level = new Level();
-            testEnemy1 = new TestEnemy(level,true);
         }
 
         public override void Update(GameTime theTime) {
             level.update(theTime);
             player.Update(theTime);
-            testEnemy1.Update(theTime);
 
             base.Update(theTime);
         }
 
         public override void Draw(SpriteBatch theBatch) {
             player.Draw(theBatch);
-            testEnemy1.Draw(theBatch);
             level.draw(theBatch);
 
             // Draw debug mouse point
             theBatch.Draw(Game1.textureManager.point, new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y), Color.White);
 
+            /*
             level.firstWaveEndpoints.ForEach((endpoint) => {
+                theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
+            });
+            */
+            /*
+            level.secondWaveEndpoints.ForEach((endpoint) => {
+                theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
+            });
+            
+            level.thirdWaveEndpoints.ForEach((endpoint) => {
+                theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
+            });
+            */
+
+            level.fourthWaveEndpoints.ForEach((endpoint) => {
                 theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
             });
 
