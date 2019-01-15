@@ -17,12 +17,15 @@ namespace Galaga.Class.EnemyScripts {
         const float SHOOT_RATE = 2f;
 
         Texture2D texture;
+        List<Texture2D> textureList;
         public Vector2 pos;
+        public String label = "Yellow";
         Level level;
         float speed = 500f;
         float counter = 0f;
         float shootCounter = 0f;
         float shootChance = 0.005f;
+        int enemyTexture = 0;
         Random random;
 
         List<Bullet> bullets;
@@ -42,9 +45,29 @@ namespace Galaga.Class.EnemyScripts {
 
         public Enemy(Level _level, bool _reversed) {
             random = new Random();
+            enemyTexture = random.Next(1, 4);
             level = _level;
             reversed = _reversed;
-            texture = Game1.textureManager.enemy1.First();
+            finishedPath = false;
+            end = false;
+            onEndPoint = false;
+            switch (enemyTexture) {
+                case 1:
+                    texture = Game1.textureManager.enemy1.First();
+                    textureList = Game1.textureManager.enemy1;
+                    label = "Boss";
+                    break;
+                case 2:
+                    texture = Game1.textureManager.enemy2.First();
+                    textureList = Game1.textureManager.enemy2;
+                    label = "Blue";
+                    break;
+                case 3:
+                    label = "Red";
+                    texture = Game1.textureManager.enemy3.First();
+                    textureList = Game1.textureManager.enemy3;
+                    break;
+            }
             followedPoint = level.getCurrentWavePath().getNextFollowedPoint(followedPointIdx);
             followedPointIdx++;
             pos = level.getCurrentWavePath().startingPoint;
@@ -69,7 +92,7 @@ namespace Galaga.Class.EnemyScripts {
                 shootCounter = 0f;
             }
 
-            Animator.animate(theTime, ref this.texture, Game1.textureManager.enemy1, 0.4f, ref counter, true);
+            Animator.animate(theTime, ref this.texture, textureList, 0.4f, ref counter, true);
 
             bullets.ForEach((bullet) => bullet.update(theTime));
 

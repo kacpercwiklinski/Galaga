@@ -46,6 +46,13 @@ namespace Galaga.Class.Screen {
                         player.bullets[i].isVisible = false;
                         player.bullets[i].isTriggerable = false;
                         e.isVisible = false;
+                        if (e.label.Equals("Red")) {
+                            score += 80;
+                        }else if (e.label.Equals("Blue")) {
+                            score += 50;
+                        } else if (e.label.Equals("Boss")) {
+                            score += 150;
+                        }
                     }
                 }
             }
@@ -66,6 +73,7 @@ namespace Galaga.Class.Screen {
             level.draw(theBatch);
 
             theBatch.DrawString(scoreFont, "" + score, new Vector2(630, 545), Color.Yellow);
+            theBatch.DrawString(Game1.textureManager.stageFont, "Stage " + Level.stage, new Vector2(50, 50), Color.Yellow);
 
             foreach (Explosion explosion in explosionsList){
                 explosion.Draw(theBatch);

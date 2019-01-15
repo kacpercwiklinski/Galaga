@@ -17,13 +17,13 @@
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Audio/explosion.wav;Audio/boom.wav
+/build:Audio/explosion.wav
 
 #begin Audio/pewpew.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Audio/pewpew.wav;Audio/shoot.wav
+/build:Audio/pewpew.wav
 
 #begin Font/bezierCurveFont.spritefont
 /importer:FontDescriptionImporter
@@ -39,12 +39,22 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/optionFont.spritefont
 
-#begin Font/score.spritefont
+#begin Font/sc.ttf
+/copy:Font/sc.ttf
+
+#begin Font/scorefont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Font/score.spritefont;Font/scoreFont.spritefont
+/build:Font/scorefont.spritefont
+
+#begin Font/stageFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/stageFont.spritefont
 
 #begin Textures/Background/backgroundWithStars.png
 /importer:TextureImporter
@@ -165,6 +175,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Enemies/Enemy2/enemy2_2.png
+
+#begin Textures/Enemies/Enemy3/enemy3_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Enemies/Enemy3/enemy3_1.png
+
+#begin Textures/Enemies/Enemy3/enemy3_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Enemies/Enemy3/enemy3_2.png
 
 #begin Textures/Explosion/explosion_1.png
 /importer:TextureImporter

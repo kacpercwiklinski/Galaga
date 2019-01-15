@@ -11,6 +11,7 @@ namespace Galaga.Class.Utils {
 
         // Fonts
         public SpriteFont bezierCurveFont;
+        public SpriteFont stageFont;
 
         //Background
         public Texture2D splashScreenBackground;
@@ -25,6 +26,7 @@ namespace Galaga.Class.Utils {
         // Enemies
         public List<Texture2D> enemy1 = new List<Texture2D>();
         public List<Texture2D> enemy2 = new List<Texture2D>();
+        public List<Texture2D> enemy3 = new List<Texture2D>();
 
         // Debug
         public Texture2D centerLine;
@@ -55,6 +57,7 @@ namespace Galaga.Class.Utils {
 
             // Fonts 
             bezierCurveFont = theContent.Load<SpriteFont>("Font/bezierCurveFont");
+            stageFont = theContent.Load<SpriteFont>("Font/stageFont");
 
             // Background
             splashScreenBackground = theContent.Load<Texture2D>("Textures/Background/splashScreenBackground");
@@ -72,7 +75,10 @@ namespace Galaga.Class.Utils {
 
             enemy2.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy2/enemy2_1"));
             enemy2.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy2/enemy2_2"));
-            
+
+            enemy3.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy3/enemy3_1"));
+            enemy3.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy3/enemy3_2"));
+
             // Debug
             centerLine = theContent.Load<Texture2D>("Textures/DebugTextures/centerLine");
             point = theContent.Load<Texture2D>("Textures/DebugTextures/Point");

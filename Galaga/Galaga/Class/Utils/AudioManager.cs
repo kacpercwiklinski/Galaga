@@ -22,8 +22,8 @@ namespace Galaga.Class.Utils
 
         private void loadAudios(ContentManager theContent)
         {
-            shoot = theContent.Load<SoundEffect>("audio/shoot");
-            boom = theContent.Load<SoundEffect>("audio/boom");
+            shoot = theContent.Load<SoundEffect>("audio/pewpew");
+            boom = theContent.Load<SoundEffect>("audio/explosion");
          
         }
 

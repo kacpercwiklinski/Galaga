@@ -16,7 +16,7 @@ namespace Galaga.Class.LevelScripts {
         const int MAX_ENEMIES = 9;
         int spawnedEnemies = 0;
 
-        int stage = 1;
+        public static int stage = 1;
 
         public int wave = 1;
         public List<Enemy> enemies = new List<Enemy>();
