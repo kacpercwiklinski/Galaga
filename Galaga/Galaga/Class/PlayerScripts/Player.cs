@@ -39,7 +39,7 @@ namespace Galaga.Class {
             });
 
             bullets = bullets.FindAll((bullet) => bullet.onScreen).FindAll((bullet)=> bullet.isTriggerable);
-            }
+        }
 
         public void Draw(SpriteBatch theBatch) {
 

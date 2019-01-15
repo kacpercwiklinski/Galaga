@@ -30,10 +30,8 @@ namespace Galaga.Class.Utils {
         public Texture2D curvePoint;
 
         //Explosion
-        public Texture2D explosion;
-
-
-
+        public List<Texture2D> explosion = new List<Texture2D>();
+        
         public TextureManager(ContentManager theContent) {
             loadTextures(theContent);
         }
@@ -41,7 +39,11 @@ namespace Galaga.Class.Utils {
         private void loadTextures(ContentManager theContent) {
 
             // Explosion
-            explosion = theContent.Load<Texture2D>("Textures/explosionFull");
+            explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_1"));
+            explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_2"));
+            explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_3"));
+            explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_4"));
+            explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_5"));
 
             // Fonts 
             bezierCurveFont = theContent.Load<SpriteFont>("Font/bezierCurveFont");

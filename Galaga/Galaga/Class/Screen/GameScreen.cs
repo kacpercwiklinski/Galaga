@@ -48,7 +48,7 @@ namespace Galaga.Class.Screen {
                 {
                     if (player.bullets[i].boundingBox.Intersects(e.boundingBox) && player.bullets[i].isTriggerable)
                     {
-                        explosionsList.Add(new Explosion(Game1.textureManager.explosion, new Vector2(e.pos.X, e.pos.Y)));
+                        explosionsList.Add(new Explosion(new Vector2(e.pos.X, e.pos.Y)));
                         player.bullets[i].isVisible = false;
                         player.bullets[i].isTriggerable = false;
                         e.isVisible = false;
@@ -62,17 +62,6 @@ namespace Galaga.Class.Screen {
 
             //usuwanie eksplozji
             explosionsList = explosionsList.FindAll((explosion) => explosion.isVisible);
-
-            //uswanie przeciwnikow
-
-            for (int i = 0; i < level.enemies.Count; i++)
-            {
-                if (!level.enemies[i].isVisible)
-                {
-                    level.enemies.RemoveAt(i);
-                    i--;
-                }
-            }
             
             base.Update(theTime);
         }
