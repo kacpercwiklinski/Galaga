@@ -51,6 +51,7 @@
     <Compile Include="Class\Screen\GameScreen.cs" />
     <Compile Include="Class\Screen\MenuScreen.cs" />
     <Compile Include="Class\Screen\Screen.cs" />
+    <Compile Include="Class\Screen\GameOverScreen.cs" />
     <Compile Include="Class\Screen\SplashScreen.cs" />
     <Compile Include="Class\Utils\Animator.cs" />
     <Compile Include="Class\Utils\Background.cs" />

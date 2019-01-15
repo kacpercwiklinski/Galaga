@@ -14,11 +14,13 @@ namespace Galaga.Class.Utils {
 
         //Background
         public Texture2D splashScreenBackground;
+        public Texture2D gameOverScreenBackground;
         public Texture2D background;
         
         //Object
         public Texture2D player;
         public Texture2D bullet;
+        public Texture2D enemyBullet;
 
         // Enemies
         public List<Texture2D> enemy1 = new List<Texture2D>();
@@ -31,6 +33,7 @@ namespace Galaga.Class.Utils {
 
         //Explosion
         public List<Texture2D> explosion = new List<Texture2D>();
+        public List<Texture2D> playerExplosion = new List<Texture2D>();
         
         public TextureManager(ContentManager theContent) {
             loadTextures(theContent);
@@ -45,16 +48,23 @@ namespace Galaga.Class.Utils {
             explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_4"));
             explosion.Add(theContent.Load<Texture2D>("Textures/Explosion/explosion_5"));
 
+            playerExplosion.Add(theContent.Load<Texture2D>("Textures/Explosion/player_explosion_1"));
+            playerExplosion.Add(theContent.Load<Texture2D>("Textures/Explosion/player_explosion_2"));
+            playerExplosion.Add(theContent.Load<Texture2D>("Textures/Explosion/player_explosion_3"));
+            playerExplosion.Add(theContent.Load<Texture2D>("Textures/Explosion/player_explosion_4"));
+
             // Fonts 
             bezierCurveFont = theContent.Load<SpriteFont>("Font/bezierCurveFont");
 
             // Background
             splashScreenBackground = theContent.Load<Texture2D>("Textures/Background/splashScreenBackground");
             background = theContent.Load<Texture2D>("Textures/Background/backgroundWithStars");
+            gameOverScreenBackground = theContent.Load<Texture2D>("Textures/Background/gameOverScreenBackground");
 
             //Object 
             player = theContent.Load<Texture2D>("Textures/Object/player");
             bullet = theContent.Load<Texture2D>("Textures/Object/bullet");
+            enemyBullet = theContent.Load<Texture2D>("Textures/Object/enemy_bullet");
 
             // Enemies
             enemy1.Add(theContent.Load<Texture2D>("Textures/Enemies/Enemy1/enemy1_1"));

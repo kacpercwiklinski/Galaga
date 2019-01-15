@@ -18,11 +18,14 @@ namespace Galaga
 
         public static TextureManager textureManager;
 
+        public static Boolean debugMode = false;
+
         SplashScreen mSplashScreen;
         Screen mCurrentScreen;
         MenuScreen mMenuScreen;
         BezierCurveEditorScreen mBezierCurveEditorScreen;
         GameScreen mGameScreen;
+        GameOverScreen mGameOverScreen;
 
         public const int WIDTH = 1280;
         public const int HEIGHT = 720;
@@ -64,17 +67,18 @@ namespace Galaga
             mSplashScreen = new SplashScreen(this.Content, new EventHandler(ControllerDetectScreenEvent));
             mMenuScreen = new MenuScreen(this.Content, new EventHandler(MenuScreenEvent));
             mGameScreen = new GameScreen(this.Content, new EventHandler(GameScreenEvent));
-            mBezierCurveEditorScreen = new BezierCurveEditorScreen(this.Content, new EventHandler(BezierCurveEditorScreenEvent));
+            mBezierCurveEditorScreen = new BezierCurveEditorScreen(this.Content, new EventHandler(GameOverScreenEvent));
+            mGameOverScreen = new GameOverScreen(this.Content, new EventHandler(GameOverScreenEvent));
 
             mCurrentScreen = mSplashScreen;
         }
 
-        private void BezierCurveEditorScreenEvent(object sender, EventArgs e) {
+        private void GameOverScreenEvent(object sender, EventArgs e) {
             mCurrentScreen = mMenuScreen;
         }
 
         private void GameScreenEvent(object sender, EventArgs e) {
-
+            mCurrentScreen = mGameOverScreen;
         }
 
         private void MenuScreenEvent(object sender, EventArgs e) {

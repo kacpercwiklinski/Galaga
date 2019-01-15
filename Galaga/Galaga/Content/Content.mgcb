@@ -39,6 +39,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Background/backgroundWithStars.png
 
+#begin Textures/Background/gameOverScreenBackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Background/gameOverScreenBackground.png
+
 #begin Textures/Background/splashScreenBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -195,7 +207,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Explosion/explosion_5.png
 
-#begin Textures/explosionFull.png
+#begin Textures/Explosion/player_explosion_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -205,7 +217,43 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/explosionFull.png
+/build:Textures/Explosion/player_explosion_1.png
+
+#begin Textures/Explosion/player_explosion_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Explosion/player_explosion_2.png
+
+#begin Textures/Explosion/player_explosion_3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Explosion/player_explosion_3.png
+
+#begin Textures/Explosion/player_explosion_4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Explosion/player_explosion_4.png
 
 #begin Textures/Object/bullet.png
 /importer:TextureImporter
@@ -218,6 +266,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Object/bullet.png
+
+#begin Textures/Object/enemy_bullet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Object/enemy_bullet.png
 
 #begin Textures/Object/player.png
 /importer:TextureImporter

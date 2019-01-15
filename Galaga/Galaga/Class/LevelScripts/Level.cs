@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Galaga.Class.LevelScripts {
     public class Level {
         
-        const float SPAWN_RATE = 0.7f;
+        const float SPAWN_RATE = 0.2f;
         const int MAX_ENEMIES = 9;
         int spawnedEnemies = 0;
 
@@ -21,6 +21,7 @@ namespace Galaga.Class.LevelScripts {
         public int wave = 1;
         public List<Enemy> enemies = new List<Enemy>();
         float spawnCounter = SPAWN_RATE;
+        Boolean spawnFinished = false;
 
         public List<Vector2> firstWaveEndpoints;
         public List<Vector2> secondWaveEndpoints;
@@ -43,6 +44,10 @@ namespace Galaga.Class.LevelScripts {
 
             // Remove destroyed enemies
             enemies = enemies.FindAll((enemy) => enemy.isVisible);
+
+            if(enemies.Count() == 0 && spawnFinished) {
+                nextWave();
+            }
 
             // Update Enemies
             enemies.ForEach((enemy) =>{
@@ -68,6 +73,7 @@ namespace Galaga.Class.LevelScripts {
         public void nextWave() {
             enemies.Clear();
             spawnedEnemies = 0;
+            spawnFinished = false;
             if (wave + 1 == 5) {
                 setupEndpoints();
                 nextStage();
@@ -250,6 +256,9 @@ namespace Galaga.Class.LevelScripts {
                 enemies.Add(new Enemy(this, false));
                 spawnCounter = SPAWN_RATE;
                 spawnedEnemies += 2;
+                if(spawnedEnemies == MAX_ENEMIES * 2) {
+                    spawnFinished = true;
+                }
             }
         }
     }

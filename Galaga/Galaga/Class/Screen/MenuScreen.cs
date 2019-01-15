@@ -20,7 +20,9 @@ namespace Galaga.Class.Screen {
 
             options = new List<Option>();
             options.Add(new Option("Play", true));
-            options.Add(new Option("Bezier Editor", false));
+            if (Game1.debugMode) {
+                options.Add(new Option("Bezier Editor", false));
+            }
             options.Add(new Option("Exit", false));
 
             optionsFont = theContent.Load<SpriteFont>("font/optionFont");

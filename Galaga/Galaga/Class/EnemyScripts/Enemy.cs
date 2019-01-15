@@ -9,15 +9,23 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Galaga.Class.Player;
 
 namespace Galaga.Class.EnemyScripts {
     public class Enemy {
 
+        const float SHOOT_RATE = 2f;
+
         Texture2D texture;
         public Vector2 pos;
         Level level;
-        float speed = 300f;
+        float speed = 500f;
         float counter = 0f;
+        float shootCounter = 0f;
+        float shootChance = 0.005f;
+        Random random;
+
+        List<Bullet> bullets;
 
         Boolean reversed = false;
         Boolean finishedPath = false;
@@ -33,12 +41,14 @@ namespace Galaga.Class.EnemyScripts {
         public bool isVisible;
 
         public Enemy(Level _level, bool _reversed) {
+            random = new Random();
             level = _level;
             reversed = _reversed;
             texture = Game1.textureManager.enemy1.First();
             followedPoint = level.getCurrentWavePath().getNextFollowedPoint(followedPointIdx);
             followedPointIdx++;
             pos = level.getCurrentWavePath().startingPoint;
+            bullets = new List<Bullet>();
             if (reversed) {
                 float reflectedX = followedPoint.X + (2 * (Game1.WIDTH / 2 - followedPoint.X));
                 followedPoint = new Vector2(reflectedX, followedPoint.Y);
@@ -52,16 +62,33 @@ namespace Galaga.Class.EnemyScripts {
             boundingBox = new Rectangle((int)pos.X - texture.Width/2, (int)pos.Y, texture.Width, texture.Height);
 
             counter += (float)theTime.ElapsedGameTime.TotalSeconds;
+            shootCounter += (float)theTime.ElapsedGameTime.TotalSeconds;
+
+            if(shootCounter > SHOOT_RATE && (float)random.NextDouble() < shootChance) {
+                shoot();
+                shootCounter = 0f;
+            }
 
             Animator.animate(theTime, ref this.texture, Game1.textureManager.enemy1, 0.4f, ref counter, true);
 
-            var mouseState = Mouse.GetState();
+            bullets.ForEach((bullet) => bullet.update(theTime));
+
+            checkBulletsCollisions();
 
             followPoint(theTime);
         }
 
+        private void checkBulletsCollisions() {
+            bullets.ForEach((bullet) => {
+                if (bullet.boundingBox.Intersects(Player.boundingBox) && bullet.isTriggerable) {
+                    Player.explode();
+                }
+            });
+        }
+
         public void Draw(SpriteBatch theBatch) {
             theBatch.Draw(texture, pos, new Rectangle(0, 0, texture.Width, texture.Height), Color.White, angle, new Vector2(texture.Width / 2, 0), -1.0f, SpriteEffects.None, 1);
+            bullets.ForEach((bullet) => bullet.draw(theBatch));
         }
 
         private void followPoint(GameTime theTime) {
@@ -96,6 +123,10 @@ namespace Galaga.Class.EnemyScripts {
                 }
             }
 
+        }
+
+        private void shoot() {
+            bullets.Add(new Bullet(pos, new Vector2(0, 1),500f,true));
         }
     }
 

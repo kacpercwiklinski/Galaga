@@ -34,7 +34,7 @@ namespace Galaga.Class.LevelScripts
         {
             texturePos = new Vector2(position.X, position.Y);
 
-            Animator.animate(gameTime, ref texture, Game1.textureManager.explosion, 0.1f, ref counter,true);
+            Animator.animate(gameTime, ref texture, Game1.textureManager.explosion, 0.08f, ref counter,true);
             counter += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (texture.Equals(Game1.textureManager.explosion.Last())) {
                 isVisible = false;
