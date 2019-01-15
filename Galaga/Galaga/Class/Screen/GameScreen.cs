@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ namespace Galaga.Class.Screen {
         public override void Update(GameTime theTime) {
             level.update(theTime);
             player.Update(theTime);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.X)) {
+                level.nextWave();
+            }
 
             base.Update(theTime);
         }
@@ -48,11 +53,11 @@ namespace Galaga.Class.Screen {
             level.thirdWaveEndpoints.ForEach((endpoint) => {
                 theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
             });
-            */
-
+            
             level.fourthWaveEndpoints.ForEach((endpoint) => {
                 theBatch.Draw(Game1.textureManager.point, endpoint, Color.White);
             });
+            */
 
             theBatch.Draw(Game1.textureManager.centerLine, new Vector2(Game1.WIDTH / 2, 0), Color.White);
             base.Draw(theBatch);

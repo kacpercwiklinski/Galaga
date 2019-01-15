@@ -60,7 +60,21 @@ namespace Galaga.Class.LevelScripts {
             spawnEnemies();
             setupEndpoints();
         }
+
+        public void nextWave() {
+            enemies.Clear();
+            if(wave + 1 == 5) {
+                setupEndpoints();
+                nextStage();
+            } else {
+                wave++;
+            }
+        }
         
+        private void nextStage() {
+            stage++;
+            wave = 1;
+        }
 
         private void setupPaths() {
             // Path 1
