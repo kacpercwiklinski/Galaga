@@ -14,7 +14,7 @@ namespace Galaga.Class.EnemyScripts {
     class Enemy {
 
         Texture2D texture;
-        Vector2 pos;
+        public Vector2 pos;
         Level level;
         float speed = 300f;
         float counter = 0f;
@@ -29,6 +29,9 @@ namespace Galaga.Class.EnemyScripts {
         Vector2 followedPoint;
         int followedPointIdx = 0;
 
+        public Rectangle boundingBox;
+        public bool isVisible;
+
         public Enemy(Level _level, bool _reversed) {
             level = _level;
             reversed = _reversed;
@@ -41,6 +44,7 @@ namespace Galaga.Class.EnemyScripts {
                 followedPoint = new Vector2(reflectedX, followedPoint.Y);
                 pos = new Vector2(level.getCurrentWavePath().startingPoint.X + (2 * (Game1.WIDTH / 2 - level.getCurrentWavePath().startingPoint.X)), level.getCurrentWavePath().startingPoint.Y);
             }
+            isVisible = true;
         }
 
         public void Update(GameTime theTime) {
@@ -52,11 +56,18 @@ namespace Galaga.Class.EnemyScripts {
 
             followPoint(theTime);
 
+
+
             /*
             this.pos = level.getCurrentLevelPath().getPoint(t);
             t += 0.005f;
             t = t > 3 ? 0 : t;
             */
+
+
+            //Aktualizacja Bundingbox
+            boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
+
         }
 
         public void Draw(SpriteBatch theBatch) {

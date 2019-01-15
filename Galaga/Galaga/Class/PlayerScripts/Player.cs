@@ -1,4 +1,5 @@
 ﻿using Galaga.Class.LevelScripts;
+using Galaga.Class.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,7 +17,8 @@ namespace Galaga.Class {
         Vector2 pos;
         float speed = 300f;
         float shootCooldown = 0f;
-        List<Bullet> bullets;
+        public List<Bullet> bullets;
+
 
         public Player() {
             bullets = new List<Bullet>();
@@ -36,9 +38,9 @@ namespace Galaga.Class {
             bullets.ForEach((bullet) => {
                 bullet.update(theTime);
             });
-            
-            //bullets = bullets.FindAll((bullet) => bullet.onScreen);
-        }
+
+                //bullets = bullets.FindAll((bullet) => bullet.onScreen);
+            }
 
         public void Draw(SpriteBatch theBatch) {
 
@@ -80,15 +82,21 @@ namespace Galaga.Class {
             Vector2 pos;
             public Boolean onScreen = true;
             float speed = 800f;
+            public Rectangle boundingBox;
+            public bool isVisible;
 
             public Bullet(Vector2 playerPos) {
                 this.pos = new Vector2(playerPos.X - Game1.textureManager.bullet.Width/2,playerPos.Y);
+                this.isVisible = false;
+
             }
 
             public void update(GameTime theTime) {
                 this.pos.Y -= speed * (float)theTime.ElapsedGameTime.TotalSeconds;
 
-                if(this.pos.Y < 0) this.onScreen = false;
+                boundingBox = new Rectangle((int)pos.X, (int)pos.Y, 9, 24);
+
+                if (this.pos.Y < 0) this.onScreen = false;
             }
 
             public void draw(SpriteBatch theBatch) {

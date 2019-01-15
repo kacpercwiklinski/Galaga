@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Class\EnemyScripts\Enemy.cs" />
+    <Compile Include="Class\LevelScripts\Explosion.cs" />
     <Compile Include="Class\LevelScripts\Level.cs" />
     <Compile Include="Class\LevelScripts\Path.cs" />
     <Compile Include="Class\PlayerScripts\Player.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Class\Screen\Screen.cs" />
     <Compile Include="Class\Screen\SplashScreen.cs" />
     <Compile Include="Class\Utils\Animator.cs" />
+    <Compile Include="Class\Utils\Background.cs" />
     <Compile Include="Class\Utils\BezierCurve.cs" />
     <Compile Include="Class\Utils\TextureManager.cs" />
     <Compile Include="Game1.cs" />

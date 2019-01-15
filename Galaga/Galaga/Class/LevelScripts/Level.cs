@@ -12,13 +12,15 @@ using System.Threading.Tasks;
 namespace Galaga.Class.LevelScripts {
     public class Level {
 
+    
+
         const float SPAWN_RATE = 0.7f;
         const int MAX_ENEMIES = 9;
 
         int stage = 1;
 
         public int wave = 1;
-        List<Enemy> enemies;
+        private List<Enemy> enemies = new List<Enemy>();
         float spawnCounter = SPAWN_RATE;
 
         public List<Vector2> firstWaveEndpoints;
@@ -26,8 +28,10 @@ namespace Galaga.Class.LevelScripts {
         public List<Vector2> thirdWaveEndpoints;
         public List<Vector2> fourthWaveEndpoints;
 
+        internal List<Enemy> Enemies { get => enemies; set => enemies = value; }
+
         public Level() {
-            enemies = new List<Enemy>();
+            
             firstWaveEndpoints = new List<Vector2>();
             secondWaveEndpoints = new List<Vector2>();
             thirdWaveEndpoints = new List<Vector2>();
@@ -35,20 +39,29 @@ namespace Galaga.Class.LevelScripts {
             initializeLevel(wave);
         }
 
-        public void update(GameTime theTime) { 
+        public void update(GameTime theTime)
+        {
             spawnEnemies();
             spawnCounter -= (float)theTime.ElapsedGameTime.TotalSeconds;
 
             // Update Enemies
-            enemies.ForEach((enemy) => {
+            Enemies.ForEach((enemy) =>
+            {
                 enemy.Update(theTime);
             });
+
+
+
+           
+
+
+
 
         }
 
         public void draw(SpriteBatch theBatch) {
             // Draw Enemies
-            enemies.ForEach((enemy) => {
+            Enemies.ForEach((enemy) => {
                 enemy.Draw(theBatch);
             });
         }
@@ -62,7 +75,7 @@ namespace Galaga.Class.LevelScripts {
         }
 
         public void nextWave() {
-            enemies.Clear();
+            Enemies.Clear();
             if(wave + 1 == 5) {
                 setupEndpoints();
                 nextStage();
@@ -240,9 +253,9 @@ namespace Galaga.Class.LevelScripts {
         }
 
         private void spawnEnemies() {
-            if (spawnCounter <= 0f && enemies.Count() <= MAX_ENEMIES*2) {
-                enemies.Add(new Enemy(this, true));
-                enemies.Add(new Enemy(this, false));
+            if (spawnCounter <= 0f && Enemies.Count() <= MAX_ENEMIES*2) {
+                Enemies.Add(new Enemy(this, true));
+                Enemies.Add(new Enemy(this, false));
                 spawnCounter = SPAWN_RATE;
             }
         }

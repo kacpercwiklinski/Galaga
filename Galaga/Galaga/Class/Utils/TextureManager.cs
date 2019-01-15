@@ -14,6 +14,7 @@ namespace Galaga.Class.Utils {
 
         //Background
         public Texture2D splashScreenBackground;
+        public Texture2D background;
         
         //Object
         public Texture2D player;
@@ -28,17 +29,26 @@ namespace Galaga.Class.Utils {
         public Texture2D point;
         public Texture2D curvePoint;
 
+        //Explosion
+        public Texture2D explosion;
+
+
+
         public TextureManager(ContentManager theContent) {
             loadTextures(theContent);
         }
 
         private void loadTextures(ContentManager theContent) {
 
+            // Explosion
+            explosion = theContent.Load<Texture2D>("Textures/explosionFull");
+
             // Fonts 
             bezierCurveFont = theContent.Load<SpriteFont>("Font/bezierCurveFont");
 
             // Background
             splashScreenBackground = theContent.Load<Texture2D>("Textures/Background/splashScreenBackground");
+            background = theContent.Load<Texture2D>("Textures/Background/backgroundWithStars");
 
             //Object 
             player = theContent.Load<Texture2D>("Textures/Object/player");
