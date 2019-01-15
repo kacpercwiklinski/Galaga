@@ -15,7 +15,9 @@ namespace Galaga.Class.LevelScripts {
         const float SPAWN_RATE = 0.7f;
         const int MAX_ENEMIES = 9;
 
-        public int wave = 4;
+        int stage = 1;
+
+        public int wave = 1;
         List<Enemy> enemies;
         float spawnCounter = SPAWN_RATE;
 
@@ -58,6 +60,7 @@ namespace Galaga.Class.LevelScripts {
             spawnEnemies();
             setupEndpoints();
         }
+        
 
         private void setupPaths() {
             // Path 1
