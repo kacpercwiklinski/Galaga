@@ -97,7 +97,7 @@ namespace Galaga.Class {
 
         private void shoot() {
             bullets.Add(new Bullet(pos, new Vector2(0,-1),400f,false));
-            Game1.audioManager.shoot.Play(0.7f, -1.0f, 0.0f);
+            Game1.audioManager.shoot.Play(0.1f, -1.0f, 0.0f);
         }
 
         public static void explode() {

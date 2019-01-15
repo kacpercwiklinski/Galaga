@@ -26,7 +26,7 @@ namespace Galaga.Class.LevelScripts
 
         public Explosion(Vector2 pos) {
             texture = Game1.textureManager.explosion.First();
-            Game1.audioManager.boom.Play(0.7f, -1.0f, 0.0f);
+            Game1.audioManager.boom.Play(0.1f, -1.0f, 0.0f);
             position = pos;
             isVisible = true;
         }
