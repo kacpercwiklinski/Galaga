@@ -72,7 +72,7 @@ namespace Galaga.Class.Screen {
             player.Draw(theBatch);
             level.draw(theBatch);
 
-            theBatch.DrawString(scoreFont, "" + score, new Vector2(630, 545), Color.Yellow);
+            theBatch.DrawString(scoreFont, "" + score, new Vector2(50, 100), Color.Yellow);
             theBatch.DrawString(Game1.textureManager.stageFont, "Stage " + Level.stage, new Vector2(50, 50), Color.Yellow);
 
             foreach (Explosion explosion in explosionsList){

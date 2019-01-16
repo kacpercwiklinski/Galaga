@@ -24,7 +24,7 @@ namespace Galaga.Class.EnemyScripts {
         float speed = 500f;
         float counter = 0f;
         float shootCounter = 0f;
-        float shootChance = 0.005f;
+        float shootChance = 0.003f;
         int enemyTexture = 0;
         Random random;
 
