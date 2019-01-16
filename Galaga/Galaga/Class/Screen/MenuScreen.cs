@@ -16,7 +16,7 @@ namespace Galaga.Class.Screen {
         float counter = 0.2f;
 
         public MenuScreen(ContentManager theContent, EventHandler theScreenEvent) : base(theScreenEvent) {
-            //     mTitleScreenBackground = theContent.Load<Texture2D>("textures/TitleScreen");
+            mTitleScreenBackground = Game1.textureManager.mainMenuScreenBackground;
 
             options = new List<Option>();
             options.Add(new Option("Play", true));
@@ -31,21 +31,15 @@ namespace Galaga.Class.Screen {
         public void drawOptions(SpriteBatch spriteBatch) {
             int index = 0;
             options.ForEach((option) => {
-                Color fontColor = option.active ? Color.DeepSkyBlue : Color.DarkBlue;
+                Color fontColor = option.active ? Color.White : Color.DarkSlateGray;
                 float fontLenght = optionsFont.MeasureString(option.label).Length();
-                spriteBatch.DrawString(optionsFont, option.label, new Vector2((float)(Game1.WIDTH / 2) - fontLenght / 2, (float)(Game1.HEIGHT / 3) + index * 100), fontColor);
+                spriteBatch.DrawString(optionsFont, option.label, new Vector2((float)(Game1.WIDTH / 2) - fontLenght / 2, (float)(Game1.HEIGHT / 2) + index * 100), fontColor);
                 index++;
             });
         }
 
         public override void Update(GameTime theTime) {
             var kstate = Keyboard.GetState();
-
-            /*
-            if (GamePad.GetState(PlayerOne).Buttons.B == ButtonState.Pressed || kstate.IsKeyDown(Keys.B) == true) {
-                ScreenEvent.Invoke(this, new EventArgs());
-            }
-            */
 
             updateCounter(theTime);
 
@@ -61,6 +55,7 @@ namespace Galaga.Class.Screen {
         }
 
         public override void Draw(SpriteBatch theBatch) {
+            theBatch.Draw(mTitleScreenBackground, Vector2.Zero, Color.White);
 
             drawOptions(theBatch);
 

@@ -16,6 +16,7 @@ namespace Galaga.Class.Utils {
         //Background
         public Texture2D splashScreenBackground;
         public Texture2D gameOverScreenBackground;
+        public Texture2D mainMenuScreenBackground;
         public Texture2D background;
         
         //Object
@@ -63,6 +64,7 @@ namespace Galaga.Class.Utils {
             splashScreenBackground = theContent.Load<Texture2D>("Textures/Background/splashScreenBackground");
             background = theContent.Load<Texture2D>("Textures/Background/backgroundWithStars");
             gameOverScreenBackground = theContent.Load<Texture2D>("Textures/Background/gameOverScreenBackground");
+            mainMenuScreenBackground = theContent.Load<Texture2D>("Textures/Background/mainMenuBackround");
 
             //Object 
             player = theContent.Load<Texture2D>("Textures/Object/player");
