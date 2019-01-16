@@ -87,6 +87,7 @@ namespace Galaga.Class.Screen {
         }
 
         public void StartGame() {
+            score = 0;
             player = new Player(this);
             level = new Level();
             background = new Background();
